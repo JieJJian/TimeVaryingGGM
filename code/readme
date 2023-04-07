@@ -1,0 +1,122 @@
+******************************************************************
+
+“oneline_example.R” provide a quick example on how to run simulation with GEN 
+and GFL within one minute. Besides, there are two folders for codes and the dataset 
+respectively.
+
+**** The folder “R” contains R files to implement the generalized**************
+**** elastic net (GEN) and the generalized fused LASSO (GFL)***************
+
+List of files in the folder “R”:
+*********** GEN_TVNet_utilities.R ***************
+*********************************************** 
+This R file includes a collection of small functions that will be used to 
+implement GEN.
+
+*********** GEN_TVNet.R ********************** 
+********************************************** 
+A main function to implement GEN, used by calling TVNet_GEN_utilities.R
+Input: 
+YY: a list of datasets at T time points
+lambda1: a positive scalar, the LASSO tuning parameter
+lambda2: a positive scalar, the Time-varying tuning parameter
+alpha: penalty parameter in ADMM
+tol_rho=1e-5: tolerance for \rho in the two-step procedure
+tol_sigma=1e-5: tolerance for \sigma in the two-step procedure
+tol_admm=1e-5: tolerance for ADMM 
+Output: 
+est_rho: A list of temporal estimated partial correlation matrices
+sigma: estimated diagonal in the precision matrices
+est_con: A list of temporal estimated concentration matrices
+iteration_ADMM_record: A vector recording how many ADMM 
+iterations is used in each two-step procedure.
+number_iteration: The number of two-step iterations 
+l2_diff_square: The estimated third term in the likelihood function
+non0: The number of non-zero estimators
+fusenon0: The number of non-zero fused groups
+
+*********** gen_df_full_utilities.R ********************** 
+************************************************
+A utility function that can be used to assist the calculation of the degrees of freedom in GEN.
+
+*********** gen_df_full.R ***************************** 
+************************************************
+Sourcing the code directly will generate the result called "df_full.RData" in the same folder.
+Make sure there are generated “simulationData_50_1.RData" and "s1_gen_50.RData" in the same folder.
+
+*********** gen_simulation_single_s1_50.R ***********
+************************************************
+Code to a single trial simulation with the generalized elastic net (GEN), 
+given a set of lambda1 and lambda2 values.
+Sourcing the code directly will output the dataset “simulationData_50_1.RData" and generate 
+the result called “s1_gen_50.RData” in the same folder.
+
+*********** gen_simulation_repeat_s1_50.R ********
+********************************************** 
+Code to replicate the simulation with the generalized elastic net (GEN).
+The current replication number, sample size, lambda1, lambda is set as 100, 50, 0.01 and 20, which can be changed. 
+Sourcing the code directly will generate the result called “s1_gen_n50_repeat.RData"
+in the same folder.
+
+*********** GFL_TVNet_utilities.R ***************
+*********************************************** 
+This R file includes a collection of small functions that will be used to 
+implement GFL.
+
+*********** GFL_admm_zupdate.R ***************
+*********************************************** 
+This R file includes a function that will be used to 
+update the second step of ADMM.
+
+*********** GFL_TVNet.R ********************** 
+********************************************** 
+A main function to implement GFL, used by calling TVNet_GEN_utilities.R
+Input: 
+YY: a list of datasets at T time points
+lambda1: a positive scalar, the LASSO tuning parameter
+lambda2: a positive scalar, the Time-varying tuning parameter
+alpha: penalty parameter in ADMM
+tol_rho=1e-5: tolerance for \rho in the two-step procedure
+tol_sigma=1e-5: tolerance for \sigma in the two-step procedure
+tol_admm=1e-5: tolerance for ADMM 
+Output: 
+est_rho: A list of temporal estimated partial correlation matrices
+sigma: estimated diagonal in the precision matrices
+est_con: A list of temporal estimated concentration matrices
+iteration_ADMM_record: A vector recording how many ADMM 
+iterations is used in each two-step procedure.
+number_iteration: The number of two-step iterations 
+l2_diff_square: The estimated third term in the likelihood function
+non0: The number of non-zero estimators
+fusenon0: The number of non-zero fused groups
+
+
+*********** gfl_simulation_single_s1_50.R ***********
+************************************************
+Code to a single trial simulation with the generalized fused LASSO (GFL), 
+given a set of lambda1 and lambda2 values.
+Sourcing the code directly will output the dataset “simulationData_50_1.RData" and generate 
+the result called “s1_gfl_50.RData” in the same folder.
+
+*********** gfl_simulation_repeat_s1_50.R ********
+********************************************** 
+Code to replicate the simulation with the generalized fused LASSO (GFL).
+The current replication number, sample size, lambda1, lambda is set as 100, 50, 0.1 and 0.5, which can be changed. 
+Sourcing the code directly will generate the result called “s1_gfl_n50_repeat.RData"
+in the same folder.
+
+
+**** The folder “data” contains RData file to do the simulation***************
+ ******************************************************************
+
+*************** s1_block_xi_true_t30.RData **********
+*************************************************
+This data set contains the true covariance matrices corresponding to thirteen 
+B-spline functions,  the true covariance matrices and precision matrices at 30 
+time points.
+*************** simulationData_50_1.RData **********
+*************************************************
+This data set contains the sample data, a list of n-by-p matrices at 30 discrete time point.
+
+
+
